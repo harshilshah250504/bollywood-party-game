@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="strict-origin-when-cross-origin"><title>Bollywood Party Game</title><link rel="stylesheet" href="style.css?v=cinema"></head><body>
+<div class="cinemaLights" aria-hidden="true">
+  <span></span><span></span>
+</div>
+<header><strong>BOLLYWOOD PARTY GAME</strong><button id="fullscreen">Full screen</button></header>
+<main id="welcome" class="welcome" aria-labelledby="welcomeTitle">
+  <div class="welcomeCard">
+    <p class="welcomeLabel">Welcome to</p>
+    <h1 id="welcomeTitle">Bollywood Party Game</h1>
+    <div class="actions welcomeActions">
+      <button type="button" id="introMusic">Play welcome music</button>
+      <button type="button" class="primary" id="startGame">Start game</button>
+    </div>
+    <p id="introStatus" class="caption" role="status"></p>
+  </div>
+</main>
+<main id="gameScreen" hidden>
+<nav id="rounds"></nav><p class="eyebrow" id="label"></p><h1 id="question" tabindex="-1"></h1><p class="muted" id="rules"></p>
+<section id="visualSection" hidden><div class="visualWrap"><div id="visual"></div><div id="videoCurtain" class="videoCurtain">Starting mystery clip...</div></div></section>
+<div id="challengeControls" class="actions" hidden><button id="playChallenge" class="primary">Play challenge</button><label id="durationLabel">Clip length <select id="duration"><option value="30">30 seconds</option><option value="45">45 seconds</option><option value="60">60 seconds</option></select></label></div>
+<p id="status" class="muted" role="status">Ready</p><div class="actions"><button id="startTimer">Start answer timer</button><strong id="time" class="timer" role="timer"></strong><button type="button" id="revealAnswer" hidden>Reveal answer</button><button type="button" id="movieHint" hidden>Movie hint</button><button id="stop">Stop playback</button><button id="retrySound" hidden>Resume playback</button></div>
+<section class="playback" id="playback"><h2>After the guesses</h2><div class="actions" id="songButtons"></div><p class="caption">Hook clips run for at least one minute. Choose Full to keep the song going.</p></section>
+<div class="bottom"><button id="prev">Previous</button><span id="progress" class="muted"></span><button id="next" class="primary">Next question</button></div><section id="scores" class="scores" aria-label="Team scores"></section>
+<p class="caption footerNote">Six rounds. 16 questions each. Internet required for music and video.</p>
+</main>
+<main id="closingScreen" aria-labelledby="closingTitle" hidden>
+  <h1 id="closingTitle" tabindex="-1">Thank you</h1>
+</main>
+<div class="soundSource" aria-hidden="true"><div id="sound"></div></div>
+<dialog id="answerDialog" aria-labelledby="answerTitle">
+  <h2 id="answerTitle">Plot Twist answer</h2>
+  <p id="movieAnswer"></p>
+  <div id="revealMusic" class="actions" hidden>
+    <label id="movieSongChoice" hidden>Movie soundtrack
+      <select id="movieSong"></select>
+    </label>
+    <button type="button" id="replayMovieSong">Play movie song</button>
+    <button type="button" id="stopMovieSong">Stop song</button>
+    <span id="revealMusicStatus" class="caption" role="status"></span>
+  </div>
+  <form method="dialog"><button type="submit" class="primary" autofocus>Close</button></form>
+</dialog>
+<script src="data.js?v=cast-reveal"></script><script src="game.js?v=cinema"></script><script src="https://www.youtube.com/iframe_api"></script></body></html>
