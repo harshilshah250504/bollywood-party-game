@@ -177,7 +177,7 @@ $('introMusic').onclick = () => {
     else stop('Welcome music stopped.');
     return;
   }
-  launch({ id: 'VzLG6OqOcn8', start: 0, duration: Infinity, full: true, intro: true });
+  launch({ id: '1BWdglekty0', start: 0, duration: Infinity, full: true, intro: true });
 };
 
 $('revealAnswer').onclick = () => {
