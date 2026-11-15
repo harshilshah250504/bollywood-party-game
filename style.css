@@ -118,8 +118,14 @@ body {
 #movieSongChoice { display: grid; gap: 6px; }
 #movieSong { max-width: 100%; }
 
-.welcomeActions { justify-content: center; }
-#introStatus:empty { margin: 0; }
+#welcomePlayer {
+  display: block;
+  width: min(100%, 580px);
+  margin: 0 auto 16px;
+  border: 0;
+  border-radius: 12px;
+}
+.welcomeCard { padding-block: clamp(35px, 5.8vw, 80px); }
 body.finished > header, body.finished > .cinemaLights { display: none; }
 #closingScreen {
   display: grid;

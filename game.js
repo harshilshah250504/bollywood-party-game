@@ -3,12 +3,6 @@ let index=0,clock=null,seconds=null,playJob=null,ticker=null,watchdog=null,playe
 try{const s=JSON.parse(localStorage.getItem('meet-sequel-scores'));if(Array.isArray(s)&&s.length===2)scoreData=s.map((t,i)=>({name:String(t.name||`Team ${i+1}`),score:Math.max(0,Number(t.score)||0)}))}catch{}
 function status(message) {
   $('status').textContent = message;
-  if (!$('welcome').hidden) {
-    $('introStatus').textContent = message;
-    $('introMusic').textContent = playJob?.intro
-      ? ($('retrySound').hidden ? 'Stop welcome music' : 'Resume welcome music')
-      : 'Play welcome music';
-  }
   if (!$('revealMusic').hidden) $('revealMusicStatus').textContent = message;
 }function current(){return cards[index]}function clearClock(){clearInterval(clock);clock=null}function displayClock(){$('time').textContent=seconds===null?'':seconds>0?seconds+'s':'Time’s up!'}
 function coverVideo(covered,message='Starting mystery clip...'){$('videoCurtain').hidden=!covered;$('videoCurtain').textContent=message}
@@ -52,7 +46,7 @@ function updatePlayback() {
     const played = Math.max(0, elapsed - warmup);
     if ((job.video || job.visual) && elapsed >= warmup) coverVideo(false);
     if (played >= job.duration) {
-      stop(job.challenge ? 'Time to guess!' : job.intro ? 'Welcome music finished.' : 'Hook finished.');
+      stop(job.challenge ? 'Time to guess!' : 'Hook finished.');
       return;
     }
     status(elapsed < warmup ? 'Starting mystery clip…' :
@@ -99,7 +93,6 @@ window.onYouTubeIframeAPIReady = initPlayers;
 function launch(job) {
   stop('Loading clip…');
   playJob = job;
-  if (job.intro) status('Loading welcome music…');
   // Make the video frame visible before loading it. Some browsers defer hidden players.
   $('visualSection').hidden = !(job.visual || job.video);
   document.body.classList.toggle('hasVideo', !!(job.visual || job.video));
@@ -165,19 +158,11 @@ $('prev').onclick=()=>{if(index>0)navigate(index-1)};$('next').onclick = () => {
 $('fullscreen').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen?.();else document.documentElement.requestFullscreen?.()};document.addEventListener('keydown',e=>{if($('gameScreen').hidden||$('answerDialog').open||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName))return;if(e.key==='ArrowRight')$('next').click();if(e.key==='ArrowLeft')$('prev').click()});window.addEventListener('pagehide',()=>stop());render();
 
 $('startGame').onclick = () => {
+  $('welcomePlayer').remove();
   $('welcome').hidden = true;
   stop('Ready');
   $('gameScreen').hidden = false;
   $('question').focus();
-};
-
-$('introMusic').onclick = () => {
-  if (playJob?.intro) {
-    if (!$('retrySound').hidden) $('retrySound').onclick();
-    else stop('Welcome music stopped.');
-    return;
-  }
-  launch({ id: '1BWdglekty0', start: 0, duration: Infinity, full: true, intro: true });
 };
 
 $('revealAnswer').onclick = () => {
